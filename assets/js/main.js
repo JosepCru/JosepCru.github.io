@@ -152,8 +152,8 @@
       offset: '80%',
       handler: function(direction) {
         let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
+        progress.forEach((element) => {
+          element.style.width = element.getAttribute('aria-valuenow') + '%'
         });
       }
     })
