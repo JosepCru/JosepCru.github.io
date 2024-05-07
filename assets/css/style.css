@@ -460,10 +460,10 @@ section {
 }
 
 .skills .progress-bar {
-  width: 1px;
-  height: 10px;
-  transition: 0.9s;
-  background-color: #149ddd;
+    width: 0%; /* Cambiar de 1px a 0% */
+    height: 10px;
+    transition: width 0.9s; /* Este es correcto y crea la animación */
+    background-color: #149ddd;
 }
 
 /*--------------------------------------------------------------
