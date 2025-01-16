@@ -63,7 +63,7 @@
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="hero-container">
       <h1>Josep cruañes</h1>
-      <p><span class="typed" data-typed-items="I'm Programmer, I'm Game Developer"></span></p>
+      <p>I'm <span class="typed" data-typed-items="Programmer, Game Developer, Designer"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
     </div>
   </section><!-- End Hero -->
 
@@ -338,14 +338,13 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container section-title" data-aos="fade-up">
-
+    
         <div class="section-title">
           <h2>Contact</h2>
           <p>If you want to contact me, feel free to call me or leave a message. I'll respond you as soon as possible.</p>
         </div>
-
-        <div class="row" >
-
+    
+        <div class="row">
           <div class="col-lg-5 d-flex align-items-stretch">
             <div class="info">
               <div class="address">
@@ -353,22 +352,24 @@
                 <h4>Location:</h4>
                 <p>ICN2, UAB Campus, Bellaterra (Barcelona)</p>
               </div>
-
+    
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
                 <p>josepcrugixtv@gmail.com</p>
               </div>
-
+    
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
                 <p>+34 601 331 936</p>
               </div>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.1404236402354!2d2.109180375738324!3d41.5012316712856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49678a339b0e5%3A0xd17dfdf516b505f3!2sInstituto%20Catal%C3%A1n%20de%20Nanociencia%20y%20Nanotecnolog%C3%ADa%20(ICN2)!5e0!3m2!1ses!2ses!4v1737015058863!5m2!1ses!2ses" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.1404236402354!2d2.109180375738324!3d41.5012316712856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49678a339b0e5%3A0xd17dfdf516b505f3!2sInstituto%20Catal%C3%A1n%20de%20Nanociencia%20y%20Nanotecnolog%C3%ADa%20(ICN2)!5e0!3m2!1ses!2ses!4v1737015058863!5m2!1ses!2ses" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
+    
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form id="contact-form" action="https://formspree.io/f/mbllbenq" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
@@ -388,18 +389,46 @@
                 <textarea class="form-control" name="message" rows="10" required></textarea>
               </div>
               <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div id="form-response" style="display: none; color: green; text-align: center; margin-top: 10px;">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
-          
+    
         </div>
-
+    
       </div>
-    </section><!-- End Contact Section -->
+    </section>
+    
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevenir el envío tradicional del formulario
+        const form = event.target;
+        const formData = new FormData(form);
+    
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+    
+          if (response.ok) {
+            document.getElementById('form-response').style.display = 'block'; // Mostrar mensaje de éxito
+            form.reset(); // Reiniciar el formulario
+          } else {
+            document.getElementById('form-response').innerText = 'There was an error sending your message. Please try again later.';
+            document.getElementById('form-response').style.color = 'red';
+            document.getElementById('form-response').style.display = 'block';
+          }
+        } catch (error) {
+          document.getElementById('form-response').innerText = 'Error: Unable to send your message. Please try again later.';
+          document.getElementById('form-response').style.color = 'red';
+          document.getElementById('form-response').style.display = 'block';
+        }
+      });
+    </script>
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 
