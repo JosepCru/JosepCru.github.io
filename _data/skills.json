@@ -1,33 +1,21 @@
 {
-  "intro": "Among my strongest skills are programming in C# and C++, as well as building devices with Arduino. Over the course of my four years in the Degree in Design and Development of Video Games and Interactive Experiences, I have developed numerous games as a programmer, mostly in Unity, with one major project in Unreal. Currently, I am working on a Python-based project aimed at automating a microscope to identify nanoparticles.\n\nRecently, I have shifted my focus to learning Python and programming AI methods, while continuing to explore new technologies in Unreal and maintaining a solid foundation in C++.",
+  "intro": "Programming is the common thread: gameplay code in C# and C++ for games, and Python for machine learning and microscope automation in research.",
   "groups": [
     {
-      "name": "Languages",
-      "skills": [
-        "C#",
-        "C++",
-        "Python"
-      ]
+      "name": "AI & Scientific Computing",
+      "skills": ["Python", "Machine Learning", "Image Processing", "Computer Vision"]
     },
     {
-      "name": "Game engines",
-      "skills": [
-        "Unity",
-        "Unreal Engine"
-      ]
+      "name": "Software & Game Development",
+      "skills": ["C#", "C++", "Unity", "Unreal Engine"]
     },
     {
-      "name": "Hardware",
-      "skills": [
-        "Arduino"
-      ]
+      "name": "Hardware & Electronics",
+      "skills": ["Arduino"]
     },
     {
-      "name": "3D",
-      "skills": [
-        "3DS Max",
-        "Blender"
-      ]
+      "name": "3D & Creative Tools",
+      "skills": ["Blender", "3DS Max"]
     }
   ]
 }

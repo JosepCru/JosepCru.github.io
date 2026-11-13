@@ -1,0 +1,48 @@
+<section id="research" class="section" aria-labelledby="research-title">
+  <p class="eyebrow">{{ research.affiliation | escape }}</p>
+  <h2 id="research-title">Research &amp; AI</h2>
+  <p class="lead">{{ research.intro | escape | newline_to_br }}</p>
+
+  <div class="area-grid">
+    {%- for area in research.areas %}
+    <article class="area" data-reveal>
+      <h3>{{ area.title | escape }}</h3>
+      <p>{{ area.text | escape | newline_to_br }}</p>
+    </article>
+    {%- endfor %}
+  </div>
+
+  {%- if research.focus and research.focus.size > 0 %}
+  <h3 class="sub">Focus areas</h3>
+  <ul class="tags">
+    {%- for item in research.focus %}
+    <li>{{ item | escape }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  {%- comment %} Projects whose category is "Research" are listed here as well as in Projects. {% endcomment %}
+  {%- assign research_projects = projects | where: 'category', 'Research' %}
+  {%- if research_projects.size > 0 %}
+  <h3 class="sub">Research projects</h3>
+  <ul class="link-list">
+    {%- for p in research_projects %}
+    <li><a href="{{ p.url | relative_url }}"><strong>{{ p.title | escape }}</strong><span>{{ p.summary | escape }}</span></a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  {%- if research.publications and research.publications.size > 0 %}
+  <h3 class="sub">Publications</h3>
+  <ul class="link-list">
+    {%- for pub in research.publications %}
+    <li>
+      {%- if pub.link and pub.link != '' %}<a href="{{ pub.link }}" target="_blank" rel="noopener">{% else %}<div>{% endif %}
+      <strong>{{ pub.title | escape }}</strong>
+      <span>{{ pub.authors | escape }}{% if pub.venue and pub.venue != '' %} · {{ pub.venue | escape }}{% endif %}{% if pub.year and pub.year != '' %} · {{ pub.year | escape }}{% endif %}</span>
+      {%- if pub.link and pub.link != '' %}</a>{% else %}</div>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>

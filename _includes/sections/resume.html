@@ -1,17 +1,26 @@
-<section id="resume" class="section">
-  <h2>Resume</h2>
+<section id="resume" class="section" aria-labelledby="resume-title">
+  <div class="section-head">
+    <h2 id="resume-title">Experience &amp; Education</h2>
+    {%- if profile.cv and profile.cv != '' %}
+    <a class="btn btn-outline" href="{{ profile.cv | relative_url }}" download>Download CV</a>
+    {%- endif %}
+  </div>
   <div class="resume-grid">
     <div>
-      <h3>Education</h3>
-      {%- for item in resume.education %}
-      {% include resume-item.html item=item %}
-      {%- endfor %}
+      <h3 class="sub">Experience</h3>
+      <ol class="timeline">
+        {%- for item in resume.experience %}
+        {% include resume-item.html item=item %}
+        {%- endfor %}
+      </ol>
     </div>
     <div>
-      <h3>Professional Experience</h3>
-      {%- for item in resume.experience %}
-      {% include resume-item.html item=item %}
-      {%- endfor %}
+      <h3 class="sub">Education</h3>
+      <ol class="timeline">
+        {%- for item in resume.education %}
+        {% include resume-item.html item=item %}
+        {%- endfor %}
+      </ol>
     </div>
   </div>
 </section>

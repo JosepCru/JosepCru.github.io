@@ -1,25 +1,29 @@
-<section id="projects" class="section">
-  <h2>Projects</h2>
+<section id="projects" class="section" aria-labelledby="projects-title">
+  <h2 id="projects-title">Projects</h2>
   <p class="lead">{{ profile.projects_intro | escape | newline_to_br }}</p>
 
   {%- assign categories = projects | map: 'category' | uniq | sort -%}
   {%- if categories.size > 1 %}
   <div class="filters" role="group" aria-label="Filter projects by category">
-    <button type="button" class="active" data-filter="*">All</button>
+    <button type="button" class="active" aria-pressed="true" data-filter="*">All</button>
     {%- for c in categories %}
-    <button type="button" data-filter="{{ c | escape }}">{{ c | escape }}</button>
+    <button type="button" aria-pressed="false" data-filter="{{ c | escape }}">{{ c | escape }}</button>
     {%- endfor %}
   </div>
   {%- endif %}
 
   <div class="project-grid" data-columns="{{ site.data.appearance.project_columns | default: 'auto' }}">
     {%- for p in projects %}
-    <a class="project-card" href="{{ p.url | relative_url }}" data-category="{{ p.category | escape }}">
-      <img src="{{ p.cover | default: p.images[0] | relative_url }}" alt="" loading="lazy">
+    <a class="project-card" href="{{ p.url | relative_url }}" data-category="{{ p.category | escape }}" data-reveal>
+      <img src="{{ p.cover | default: p.images[0] | relative_url }}" alt="" loading="lazy" decoding="async">
       <div class="project-card-body">
         <span class="eyebrow">{{ p.category | escape }} · {{ p.date | date: '%Y' }}</span>
         <strong>{{ p.title | escape }}</strong>
         <p>{{ p.summary | escape }}</p>
+        {%- if p.role and p.role != '' %}
+        <span class="card-role">{{ p.role | escape }}</span>
+        {%- endif %}
+        <span class="card-more">Read case study <span aria-hidden="true">→</span></span>
       </div>
     </a>
     {%- endfor %}

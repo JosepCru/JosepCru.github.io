@@ -1,49 +1,19 @@
 {
-  "education": [
-    {
-      "title": "PhD Researcher – Group GAeN",
-      "period": "2025 - Present",
-      "place": "Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, Spain",
-      "description": "Developing AI-driven models and systems for nanoparticle analysis under the GAeN group.",
-      "bullets": []
-    },
-    {
-      "title": "Master of Multidisciplinary Research in Experimental Sciences",
-      "period": "2024 - 2025",
-      "place": "Barcelona Institute of Science and Technology (BIST) and the Pompeu Fabra University (UPF), Barcelona, Spain",
-      "description": "This master's program was an enriching experience that taught me about statistics and data analysis, machine learning, microscopy, and more. I completed both a Major and a Minor project focused on applying machine learning techniques to microscopy.",
-      "bullets": []
-    },
-    {
-      "title": "Master's Degree in Teacher Training for Compulsory Secondary Education and Baccalaureate, Vocational Training, and Language Teaching, specializing in Technology",
-      "period": "2024 - 2025",
-      "place": "Universidad Alfonso X el Sabio, Madrid, Spain",
-      "description": "This program provided me with the pedagogical and technological tools necessary for teaching. I completed my internship at Escola Escaladei in Cerdanyola del Vallès, where I applied modern educational methodologies in technology-related subjects.",
-      "bullets": []
-    },
-    {
-      "title": "Bachelor's Degree in Game Design and Development and Interactive Experiences",
-      "period": "2020 - 2024",
-      "place": "Florida Universitària & Universitat Politècnica de València, València, España",
-      "description": "During my time at Florida Universitària and my internship at UPV, I worked with most of the software commonly used today for game development: Unreal, Unity, Blender, 3DSMax, Godot, among others. My primary focus was on programming, and I am highly excited to continue learning and improving my skills in these game engines.",
-      "bullets": []
-    }
-  ],
   "experience": [
     {
-      "title": "Programmer of machine learning models applied to microscopes",
+      "title": "Machine learning developer for microscopy",
       "period": "2024 - Present",
-      "place": "Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, España",
-      "description": "",
+      "place": "GAeN group, Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, Spain",
+      "description": "Research software for nanoparticle analysis and microscope automation, first during my master's research and now as a PhD researcher.",
       "bullets": [
         "Developed a method to generate noisy images and create a mosaic from them.",
         "Designed and implemented the motion system for nanoparticle searching."
       ]
     },
     {
-      "title": "Internship Videogame programmer at NRHB Group",
+      "title": "Game programmer (internship), NRHB group",
       "period": "2023 - 2024",
-      "place": "Instituto de Investigación en Tecnologías Centradas en el Ser Humano (i3B) de la Universitat Politècnica de València (UPV), València, España",
+      "place": "Human-Centred Technology Research Institute (i3B), Universitat Politècnica de València (UPV), València, Spain",
       "description": "",
       "bullets": [
         "Created multiple minigames for the LEVEL-UP project.",
@@ -51,6 +21,36 @@
         "Designed and implemented patrol behaviors and animations for various entities on the map.",
         "Contributed to the design and programming of the user interface (UI)."
       ]
+    }
+  ],
+  "education": [
+    {
+      "title": "PhD, GAeN group",
+      "period": "2025 - Present",
+      "place": "Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, Spain",
+      "description": "Doctoral research on AI-driven models and systems for nanoparticle analysis.",
+      "bullets": []
+    },
+    {
+      "title": "Master of Multidisciplinary Research in Experimental Sciences",
+      "period": "2024 - 2025",
+      "place": "Barcelona Institute of Science and Technology (BIST) and Pompeu Fabra University (UPF), Barcelona, Spain",
+      "description": "Statistics and data analysis, machine learning and microscopy. Completed a Major and a Minor project, both applying machine learning techniques to microscopy.",
+      "bullets": []
+    },
+    {
+      "title": "Master's Degree in Teacher Training for Secondary Education, Vocational Training and Language Teaching, specialising in Technology",
+      "period": "2024 - 2025",
+      "place": "Universidad Alfonso X el Sabio, Madrid, Spain",
+      "description": "Pedagogical and technological tools for teaching. Completed the teaching internship at Escola Escaladei in Cerdanyola del Vallès, applying modern methodologies in technology subjects.",
+      "bullets": []
+    },
+    {
+      "title": "Bachelor's Degree in Game Design and Development and Interactive Experiences",
+      "period": "2020 - 2024",
+      "place": "Florida Universitària and Universitat Politècnica de València, València, Spain",
+      "description": "Programming-focused degree working with Unreal, Unity, Godot, Blender and 3DS Max, including an internship at UPV.",
+      "bullets": []
     }
   ]
 }

@@ -25,12 +25,24 @@
       { key: "category", label: "Categoría", type: "text", help: "Se usa para los filtros de la portada (p. ej. Game, AI, Hardware)." },
       { key: "date", label: "Fecha", type: "date" }
     ] },
-    { key: "client", label: "Cliente / institución", type: "text" },
+    { row: [
+      { key: "client", label: "Institución / cliente", type: "text" },
+      { key: "context", label: "Contexto", type: "text", help: "P. ej. «Final-year project»." }
+    ] },
+    { row: [
+      { key: "role", label: "Mi rol", type: "text", help: "Aparece en la tarjeta y en la ficha." },
+      { key: "team", label: "Equipo", type: "text" }
+    ] },
     { row: [
       { key: "link", label: "Enlace del proyecto", type: "text" },
       { key: "link_label", label: "Texto del enlace", type: "text" }
     ] },
     { key: "summary", label: "Resumen corto", type: "textarea", help: "Una o dos frases; aparece en la tarjeta de la portada y al compartir el enlace." },
+    { key: "objectives", label: "Caso de estudio: objetivos", type: "lines", help: "Uno por línea. Los bloques vacíos no se muestran." },
+    { key: "contribution", label: "Caso de estudio: mi contribución", type: "lines", help: "Uno por línea." },
+    { key: "technologies", label: "Caso de estudio: tecnologías", type: "lines", help: "Una por línea." },
+    { key: "implementation", label: "Caso de estudio: implementación técnica", type: "textarea", help: "Admite Markdown." },
+    { key: "challenges", label: "Caso de estudio: problemas resueltos", type: "lines", help: "Uno por línea." },
     { key: "video", label: "Vídeo de YouTube (opcional)", type: "text", help: "Pega el enlace del vídeo (youtube.com/watch?v=… o youtu.be/…). Se muestra bajo la galería." },
     { key: "published", label: "Borrador: guardar sin mostrarlo en la web", type: "draft", help: "Las imágenes sí se suben al repositorio, que es público; solo se oculta la página." }
   ];
@@ -50,14 +62,15 @@
           { key: "name", label: "Nombre", type: "text" },
           { key: "tagline", label: "Subtítulo de la barra lateral", type: "text" }
         ] },
+        { key: "headline", label: "Titular profesional", type: "text", help: "Separa las partes con «|». Aparece en la portada, en el título de la pestaña y al compartir." },
+        { key: "pitch", label: "Frase de presentación de la portada", type: "textarea" },
+        { key: "cv", label: "CV en PDF", type: "file", accept: "application/pdf", dir: "assets/cv/", help: "Al subirlo aparecen los botones «Download CV». Sin CV, la portada enlaza a Experience." },
         { key: "roles", label: "Roles de la portada (\"I'm …\")", type: "lines", help: "Uno por línea; el texto animado los va alternando." },
         { row: [
           { key: "hero_image", label: "Foto de fondo de la portada", type: "image" },
           { key: "photo", label: "Foto de perfil", type: "image" }
         ] },
-        { key: "about_intro", label: "About: introducción", type: "textarea" },
-        { key: "about_heading", label: "About: titular", type: "text" },
-        { key: "about_text", label: "About: texto", type: "textarea" },
+        { key: "about", label: "About", type: "textarea", rows: 12, help: "Deja una línea en blanco entre párrafos." },
         { key: "facts", label: "Datos (About)", type: "list", fields: [
           { row: [ { key: "label", label: "Etiqueta", type: "text" }, { key: "value", label: "Valor", type: "text" } ] }
         ] },
@@ -82,6 +95,26 @@
         { key: "groups", label: "Grupos de skills", type: "list", fields: [
           { key: "name", label: "Nombre del grupo", type: "text" },
           { key: "skills", label: "Skills", type: "lines", help: "Una por línea." }
+        ] }
+      ]
+    },
+    research: {
+      title: "Research",
+      path: "_data/research.json",
+      intro: "Sección «Research & AI». Los proyectos con categoría «Research» se listan aquí automáticamente, y las publicaciones aparecen en cuanto añadas la primera.",
+      fields: [
+        { key: "affiliation", label: "Afiliación", type: "text" },
+        { key: "intro", label: "Introducción", type: "textarea" },
+        { key: "areas", label: "Líneas de trabajo", type: "list", fields: [
+          { key: "title", label: "Título", type: "text" },
+          { key: "text", label: "Descripción", type: "textarea" }
+        ] },
+        { key: "focus", label: "Áreas de interés (etiquetas)", type: "lines", help: "Una por línea." },
+        { key: "publications", label: "Publicaciones", type: "list", fields: [
+          { key: "title", label: "Título", type: "text" },
+          { key: "authors", label: "Autores", type: "text" },
+          { row: [ { key: "venue", label: "Revista / congreso", type: "text" }, { key: "year", label: "Año", type: "text" } ] },
+          { key: "link", label: "Enlace (DOI, PDF…)", type: "text" }
         ] }
       ]
     },
@@ -116,8 +149,8 @@
       title: "Currículum",
       path: "_data/resume.json",
       fields: [
-        { key: "education", label: "Formación", type: "list", fields: RESUME_ITEM },
-        { key: "experience", label: "Experiencia profesional", type: "list", fields: RESUME_ITEM }
+        { key: "experience", label: "Experiencia profesional", type: "list", fields: RESUME_ITEM },
+        { key: "education", label: "Formación", type: "list", fields: RESUME_ITEM }
       ]
     }
   };
@@ -278,7 +311,7 @@
   /* JSON values are valid YAML, so Jekyll reads them and we can parse   */
   /* them back with JSON.parse — no YAML library needed.                 */
   /* ------------------------------------------------------------------ */
-  var FRONT_MATTER_KEYS = ["title", "category", "date", "client", "link", "link_label", "summary", "video", "published", "order", "cover", "images"];
+  var FRONT_MATTER_KEYS = ["title", "category", "date", "client", "context", "team", "role", "link", "link_label", "summary", "technologies", "objectives", "contribution", "implementation", "challenges", "video", "published", "order", "cover", "images"];
 
   function parseProject(text) {
     var match = /^---\r?\n([\s\S]*?)\r?\n?---\r?\n?([\s\S]*)$/.exec(text);
@@ -390,12 +423,13 @@
     if (def.type === "image") return buildImageField(def, target);
     if (def.type === "draft") return buildDraftField(def, target);
     if (def.type === "select") return buildSelect(def, target);
+    if (def.type === "file") return buildFileField(def, target);
     if (def.type === "sections") return buildSectionOrder(def, target);
 
     var input;
     var value = target[def.key];
     if (def.type === "textarea" || def.type === "lines") {
-      input = el("textarea", { rows: def.type === "lines" ? 4 : 5 });
+      input = el("textarea", { rows: def.rows || (def.type === "lines" ? 4 : 5) });
       input.value = def.type === "lines" ? (value || []).join("\n") : (value || "");
     } else {
       input = el("input", { type: def.type, min: def.type === "number" ? 0 : null, max: def.type === "number" ? 100 : null });
@@ -414,6 +448,31 @@
     return el("label", { class: "field" }, def.label, input, def.help ? el("span", { class: "help", text: def.help }) : null);
   }
 
+  // A document (e.g. the CV) uploaded as-is, without the image compression step.
+  function buildFileField(def, target) {
+    var status = el("span", { class: "help" });
+    function paint() { status.textContent = target[def.key] ? "Actual: " + target[def.key] : "Ningún archivo subido."; }
+    var input = el("input", { type: "file", accept: def.accept });
+    input.addEventListener("change", function () {
+      var file = input.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        var extension = (/\.[A-Za-z0-9]+$/.exec(file.name) || [".pdf"])[0].toLowerCase();
+        var path = def.dir + (slugify(file.name.replace(/\.[^.]+$/, "")) || "file") + extension;
+        uploads[path] = { base64: String(reader.result).split(",")[1], url: "", replace: true };
+        target[def.key] = "/" + path;
+        markDirty(); paint();
+      };
+      reader.onerror = function () { toast("No se pudo leer " + file.name, true); };
+      reader.readAsDataURL(file);
+    });
+    var clear = el("button", { type: "button", class: "small danger", onclick: function () { target[def.key] = ""; input.value = ""; markDirty(); paint(); } }, "Quitar");
+    paint();
+    return el("label", { class: "field" }, def.label, el("div", { class: "single-image" }, input, clear), status,
+      def.help ? el("span", { class: "help", text: def.help }) : null);
+  }
+
   function buildSelect(def, target) {
     var select = el("select");
     def.options.forEach(function (option) {
@@ -426,7 +485,7 @@
 
   // A fixed set of rows that can be reordered and switched on or off.
   function buildSectionOrder(def, target) {
-    var names = { about: "About", skills: "Skills", resume: "Resume", projects: "Projects", contact: "Contact" };
+    var names = { about: "About", research: "Research & AI", skills: "Skills", resume: "Experience & Education", projects: "Projects", contact: "Contact" };
     var items = target[def.key];
     var card = el("div", { class: "card" }, el("h3", { text: def.label }), el("p", { class: "help", text: def.help }));
     var body = el("ul", { class: "list" });
@@ -556,7 +615,7 @@
 
   function renderShell(content) {
     var tabs = el("nav", { class: "tabs", "aria-label": "Secciones" });
-    [["projects", "Proyectos"], ["profile", "Perfil"], ["skills", "Skills"], ["resume", "Currículum"], ["appearance", "Apariencia"]].forEach(function (tab) {
+    [["projects", "Proyectos"], ["profile", "Perfil"], ["research", "Research"], ["skills", "Skills"], ["resume", "Currículum"], ["appearance", "Apariencia"]].forEach(function (tab) {
       tabs.appendChild(el("button", { type: "button", class: state.tab === tab[0] ? "active" : "", onclick: function () {
         if (!confirmLeave()) return;
         state.dirty = false;
@@ -612,8 +671,9 @@
       var changes = [{ path: section.path, text: JSON.stringify(data, null, 2) + "\n" }];
       section.fields.forEach(function collect(def) {
         if (def.row) return def.row.forEach(collect);
-        var path = def.type === "image" && data[def.key] ? data[def.key].replace(/^\//, "") : null;
-        if (path && uploads[path] && state.paths.indexOf(path) === -1) changes.push({ path: path, base64: uploads[path].base64 });
+        var isUpload = def.type === "image" || def.type === "file";
+        var path = isUpload && data[def.key] ? data[def.key].replace(/^\//, "") : null;
+        if (path && uploads[path] && (uploads[path].replace || state.paths.indexOf(path) === -1)) changes.push({ path: path, base64: uploads[path].base64 });
       });
       return commit("Admin: update " + name, changes).then(function () {
         published();
@@ -677,7 +737,7 @@
     var isNew = !existing;
     var project = existing
       ? JSON.parse(JSON.stringify(existing))
-      : { slug: "", data: { title: "", category: "", date: new Date().toISOString().slice(0, 10), client: "", link: "", link_label: "", summary: "", video: "", cover: "", images: [] }, body: "" };
+      : { slug: "", data: { title: "", category: "", date: new Date().toISOString().slice(0, 10), client: "", context: "", team: "", role: "", link: "", link_label: "", summary: "", technologies: [], objectives: [], contribution: [], implementation: "", challenges: [], video: "", cover: "", images: [] }, body: "" };
     if (!Array.isArray(project.data.images)) project.data.images = [];
     // New projects get a temporary folder name; it becomes the real slug on save.
     var draftDir = IMAGES_DIR + "draft-" + Date.now().toString(36) + "/";

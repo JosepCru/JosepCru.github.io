@@ -4,12 +4,34 @@ layout: default
 {%- assign profile = site.data.profile -%}
 {%- assign skills = site.data.skills -%}
 {%- assign resume = site.data.resume -%}
+{%- assign research = site.data.research -%}
 {%- assign projects = site.projects | sort: 'order' -%}
 
-<section id="hero" class="hero" style="background-image: linear-gradient(rgba(8,22,30,.55), rgba(8,22,30,.55)), url('{{ profile.hero_image | relative_url }}')">
-  <h1>{{ profile.name | escape }}</h1>
-  <p class="hero-roles">I'm <span class="typed" data-roles="{{ profile.roles | join: '|' | escape }}">{{ profile.roles | first | escape }}</span></p>
-  <a class="hero-down" href="#about" aria-label="Scroll to About">↓</a>
+<section id="hero" class="hero" style="--hero-image: url('{{ profile.hero_image | relative_url }}')" aria-labelledby="hero-title">
+  <div class="hero-inner">
+    <p class="hero-headline">
+      {%- assign parts = profile.headline | split: '|' %}
+      {%- for part in parts %}<span>{{ part | strip | escape }}</span>{% endfor -%}
+    </p>
+    <h1 id="hero-title">{{ profile.name | escape }}</h1>
+    <p class="hero-roles">I'm <span class="typed" data-roles="{{ profile.roles | join: '|' | escape }}">{{ profile.roles | first | escape }}</span></p>
+    {%- if profile.pitch and profile.pitch != '' %}
+    <p class="hero-pitch">{{ profile.pitch | escape }}</p>
+    {%- endif %}
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View projects</a>
+      {%- if profile.cv and profile.cv != '' %}
+      <a class="btn btn-light" href="{{ profile.cv | relative_url }}" download>Download CV</a>
+      {%- else %}
+      <a class="btn btn-light" href="#resume">Experience</a>
+      {%- endif %}
+      {%- for s in profile.socials %}
+      {%- if s.name == 'GitHub' or s.name == 'LinkedIn' %}
+      <a class="btn btn-ghost" href="{{ s.url }}" target="_blank" rel="noopener me">{{ s.name }}</a>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
 </section>
 
 {%- comment %} Order and visibility come from _data/appearance.json (edited in /admin > Apariencia). {% endcomment %}
@@ -17,6 +39,7 @@ layout: default
 {%- if s.visible %}
 {%- case s.id %}
 {%- when 'about' %}{% include sections/about.html %}
+{%- when 'research' %}{% include sections/research.html %}
 {%- when 'skills' %}{% include sections/skills.html %}
 {%- when 'resume' %}{% include sections/resume.html %}
 {%- when 'projects' %}{% include sections/projects.html %}

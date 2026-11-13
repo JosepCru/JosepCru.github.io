@@ -1,6 +1,6 @@
-<div class="resume-item">
-  <h4>{{ include.item.title | escape }}</h4>
+<li class="timeline-item{% if include.item.period contains 'Present' %} current{% endif %}" data-reveal>
   <span class="period">{{ include.item.period | escape }}</span>
+  <h4>{{ include.item.title | escape }}</h4>
   <p class="place">{{ include.item.place | escape }}</p>
   {%- if include.item.description and include.item.description != '' %}
   <p>{{ include.item.description | escape | newline_to_br }}</p>
@@ -12,4 +12,4 @@
     {%- endfor %}
   </ul>
   {%- endif %}
-</div>
+</li>

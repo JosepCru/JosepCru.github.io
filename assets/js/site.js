@@ -61,12 +61,32 @@
     }
   }
 
+  /* Reveal blocks as they scroll into view (CSS skips this for reduced motion) */
+  var revealed = document.querySelectorAll("[data-reveal]");
+  if (revealed.length) {
+    if ("IntersectionObserver" in window) {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      revealed.forEach(function (node) { revealObserver.observe(node); });
+    } else {
+      revealed.forEach(function (node) { node.classList.add("in-view"); });
+    }
+  }
+
   /* Project filter */
   var filterButtons = document.querySelectorAll(".filters button");
   filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       var filter = button.dataset.filter;
-      filterButtons.forEach(function (b) { b.classList.toggle("active", b === button); });
+      filterButtons.forEach(function (b) {
+        b.classList.toggle("active", b === button);
+        b.setAttribute("aria-pressed", String(b === button));
+      });
       document.querySelectorAll(".project-card").forEach(function (card) {
         card.hidden = filter !== "*" && card.dataset.category !== filter;
       });
@@ -91,6 +111,10 @@
     if (prev) prev.addEventListener("click", function () { go(current() - 1); });
     if (next) next.addEventListener("click", function () { go(current() + 1); });
     track.addEventListener("scroll", paint, { passive: true });
+    track.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(current() - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(current() + 1); }
+    });
     paint();
   });
 

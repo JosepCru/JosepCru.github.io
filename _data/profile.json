@@ -1,27 +1,30 @@
 {
   "name": "Josep Cruañes",
-  "tagline": "PhD · ICN2",
-  "roles": ["Programmer", "Game Developer", "PhD Student"],
+  "headline": "Software Developer | AI & Scientific Computing | Game Development",
+  "tagline": "PhD researcher · ICN2",
+  "roles": ["Software Developer", "PhD Researcher", "Game Developer"],
+  "pitch": "I build software for science and for play: machine learning and microscope automation at ICN2, with a background in game development.",
   "hero_image": "/assets/img/hero-bg.jpg",
   "photo": "/assets/img/profile-img.jpg",
-  "about_intro": "Hi, I'm Josep Cruañes Giner. I graduated with a Degree in Design and Development of Video Games and Interactive Experiences, I graduated with two Master's degrees (one in Teacher Training and another in Multidisciplinary Research in Experimental Sciences) and I am currently pursuing a PhD with the GAeN group at ICN2.",
-  "about_heading": "Programmer & Designer.",
-  "about_text": "I'm originally from Xàtiva, Valencia, but I'm currently living in Cerdanyola del Vallès as a Master's student working at the Catalan Institute of Nanoscience and Nanotechnology (ICN2) in Barcelona. Additionally, I'll be starting an internship for my other Master's program (Teacher Training for Compulsory Secondary Education and Baccalaureate, Vocational Training, and Language Teaching, specializing in Technology) at Escola Escaladei, here in Cerdanyola.",
+  "cv": "",
+  "about": "I'm a software developer and PhD researcher in the GAeN group at the Catalan Institute of Nanoscience and Nanotechnology (ICN2), where I develop AI-driven models and software for nanoparticle analysis and microscope automation.\n\nI started in games. During my degree in Game Design and Development I worked as a programmer on team projects in Unity and Unreal, writing gameplay code in C# and C++, and I interned at the i3B institute (UPV) building minigames and world systems for the LEVEL-UP project.\n\nA master's in Multidisciplinary Research in Experimental Sciences (BIST–UPF) carried that programming background into science: statistics, data analysis and machine learning applied to microscopy. I also hold a master's in Teacher Training, specialising in technology.",
   "facts": [
-    { "label": "Website", "value": "josepcru.github.io" },
-    { "label": "City", "value": "Cerdanyola del Vallès, Barcelona" },
-    { "label": "Work", "value": "Programming AI models for ICN2" },
+    { "label": "Now", "value": "PhD researcher, GAeN group (ICN2)" },
+    { "label": "Focus", "value": "AI and software for microscopy" },
+    { "label": "Based in", "value": "Cerdanyola del Vallès, Barcelona" },
+    { "label": "From", "value": "Xàtiva, València" },
     { "label": "Email", "value": "josepcrugixtv@gmail.com" },
-    { "label": "Freelance", "value": "Not Available" }
+    { "label": "Freelance", "value": "Not available" }
   ],
-  "projects_intro": "As a programmer I worked on many projects in my university, I've been one of the main programmers for all of them. Here are some of the projects that I've been doing through the last years.",
-  "contact_intro": "If you want to contact me, feel free to leave a message. I'll respond you as soon as possible.",
+  "projects_intro": "University game productions and a hardware build. On the games I worked as a programmer within a team; each page explains my part.",
+  "contact_intro": "Have a question or want to talk about a project? Send me a message and I'll reply as soon as I can.",
   "email": "josepcrugixtv@gmail.com",
   "location": "ICN2, UAB Campus, Bellaterra (Barcelona)",
   "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.1404236402354!2d2.109180375738324!3d41.5012316712856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49678a339b0e5%3A0xd17dfdf516b505f3!2sInstituto%20Catal%C3%A1n%20de%20Nanociencia%20y%20Nanotecnolog%C3%ADa%20(ICN2)!5e0!3m2!1ses!2ses!4v1737015058863!5m2!1ses!2ses",
   "form_endpoint": "https://formspree.io/f/mbllbenq",
   "socials": [
-    { "name": "Instagram", "url": "https://www.instagram.com/josep_cruanes/" },
-    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/josep-cruañes-giner-814485279/" }
+    { "name": "GitHub", "url": "https://github.com/JosepCru" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/josep-cruañes-giner-814485279/" },
+    { "name": "Instagram", "url": "https://www.instagram.com/josep_cruanes/" }
   ]
 }

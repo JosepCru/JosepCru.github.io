@@ -1,25 +1,11 @@
 {
   "sections": [
-    {
-      "id": "about",
-      "visible": true
-    },
-    {
-      "id": "skills",
-      "visible": true
-    },
-    {
-      "id": "resume",
-      "visible": true
-    },
-    {
-      "id": "projects",
-      "visible": true
-    },
-    {
-      "id": "contact",
-      "visible": true
-    }
+    { "id": "about", "visible": true },
+    { "id": "research", "visible": true },
+    { "id": "projects", "visible": true },
+    { "id": "skills", "visible": true },
+    { "id": "resume", "visible": true },
+    { "id": "contact", "visible": true }
   ],
   "project_columns": "auto",
   "content_width": "1280",

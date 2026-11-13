@@ -1,0 +1,32 @@
+{
+  "affiliation": "GAeN group · Catalan Institute of Nanoscience and Nanotechnology (ICN2)",
+  "intro": "At ICN2 I write the software that helps a microscope find and analyse nanoparticles: the models that recognise them and the automation that drives the search.",
+  "areas": [
+    {
+      "title": "Microscope automation",
+      "text": "Designed and implemented the motion system the microscope uses to search a sample for nanoparticles, as part of a Python project to automate their identification."
+    },
+    {
+      "title": "Image processing",
+      "text": "Developed a method to generate noisy images and assemble them into a mosaic."
+    },
+    {
+      "title": "Machine learning & computer vision",
+      "text": "Building AI-driven models for nanoparticle analysis. My master's Major and Minor projects both applied machine learning to microscopy."
+    },
+    {
+      "title": "Data analysis",
+      "text": "Statistics and data analysis training from the Master of Multidisciplinary Research in Experimental Sciences (BIST–UPF)."
+    }
+  ],
+  "focus": [
+    "Microscope automation",
+    "Image processing",
+    "Computer vision",
+    "Machine learning",
+    "Scientific software",
+    "Scientific instrumentation",
+    "Data analysis"
+  ],
+  "publications": []
+}

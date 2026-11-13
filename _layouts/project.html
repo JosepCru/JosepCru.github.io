@@ -1,17 +1,40 @@
 ---
 layout: default
 ---
-<article class="project section">
+{%- assign ordered = site.projects | sort: 'order' %}
+{%- for p in ordered %}
+  {%- if p.url == page.url %}
+    {%- assign position = forloop.index0 %}
+  {%- endif %}
+{%- endfor %}
+{%- assign previous_index = position | minus: 1 %}
+{%- assign next_index = position | plus: 1 %}
+<article class="project section" aria-labelledby="project-title">
   <a class="back" href="{{ '/' | relative_url }}#projects">← All projects</a>
-  <p class="eyebrow">{{ page.category | escape }}</p>
-  <h1>{{ page.title | escape }}</h1>
 
-  <div class="project-layout">
-    <div class="project-media">
+  <header class="case-head">
+    <p class="eyebrow">{{ page.category | escape }} · {{ page.date | date: '%Y' }}</p>
+    <h1 id="project-title">{{ page.title | escape }}</h1>
+    {%- if page.summary and page.summary != '' %}
+    <p class="lead">{{ page.summary | escape }}</p>
+    {%- endif %}
+    <dl class="case-meta">
+      {%- if page.role and page.role != '' %}<div><dt>My role</dt><dd>{{ page.role | escape }}</dd></div>{% endif %}
+      {%- if page.team and page.team != '' %}<div><dt>Team</dt><dd>{{ page.team | escape }}</dd></div>{% endif %}
+      {%- if page.context and page.context != '' %}<div><dt>Context</dt><dd>{{ page.context | escape }}</dd></div>{% endif %}
+      {%- if page.client and page.client != '' %}<div><dt>Institution</dt><dd>{{ page.client | escape }}</dd></div>{% endif %}
+      {%- if page.date %}<div><dt>Date</dt><dd>{{ page.date | date: '%B %Y' }}</dd></div>{% endif %}
+    </dl>
+    {%- if page.link and page.link != '' %}
+    <a class="btn btn-primary" href="{{ page.link }}" target="_blank" rel="noopener">{{ page.link_label | default: 'Open project' | escape }} <span aria-hidden="true">↗</span></a>
+    {%- endif %}
+  </header>
+
+  <div class="project-media">
     <div class="gallery" data-gallery>
-      <div class="gallery-track">
+      <div class="gallery-track" tabindex="0" aria-label="{{ page.title | escape }} image gallery">
         {%- for img in page.images %}
-        <img src="{{ img | relative_url }}" alt="{{ page.title | escape }} — image {{ forloop.index }}"{% unless forloop.first %} loading="lazy"{% endunless %}>
+        <img src="{{ img | relative_url }}" alt="{{ page.title | escape }}, image {{ forloop.index }} of {{ page.images.size }}"{% unless forloop.first %} loading="lazy"{% endunless %} decoding="async">
         {%- endfor %}
       </div>
       {%- if page.images.size > 1 %}
@@ -25,20 +48,62 @@ layout: default
     {%- if page.video and page.video != '' %}
     {%- comment %} Accepts watch?v=ID, youtu.be/ID, /embed/ID and /shorts/ID links. {% endcomment %}
     {%- assign video_id = page.video | split: 'v=' | last | split: 'youtu.be/' | last | split: 'embed/' | last | split: 'shorts/' | last | split: '&' | first | split: '?' | first | split: '/' | first %}
-    <iframe class="video" src="https://www.youtube-nocookie.com/embed/{{ video_id | url_encode }}" title="{{ page.title | escape }} — video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/{{ video_id | url_encode }}" title="{{ page.title | escape }} video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
     {%- endif %}
-    </div>
-
-    <div class="project-side">
-      <dl class="project-info">
-        {%- if page.category and page.category != '' %}<dt>Category</dt><dd>{{ page.category | escape }}</dd>{% endif %}
-        {%- if page.client and page.client != '' %}<dt>Client</dt><dd>{{ page.client | escape }}</dd>{% endif %}
-        {%- if page.date %}<dt>Date</dt><dd>{{ page.date | date: '%-d %B %Y' }}</dd>{% endif %}
-        {%- if page.link and page.link != '' %}<dt>Link</dt><dd><a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.link_label | default: page.link | escape }}</a></dd>{% endif %}
-      </dl>
-      <div class="prose">
-        {{ content }}
-      </div>
-    </div>
   </div>
+
+  {%- comment %} Each block only appears when it has content, so a short project still reads well. {% endcomment %}
+  <div class="case-body">
+    <section class="case-block case-wide">
+      <h2>Overview</h2>
+      <div class="prose">{{ content }}</div>
+    </section>
+
+    {%- if page.objectives and page.objectives.size > 0 %}
+    <section class="case-block">
+      <h2>Objectives</h2>
+      <ul>{% for item in page.objectives %}<li>{{ item | escape }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+
+    {%- if page.contribution and page.contribution.size > 0 %}
+    <section class="case-block">
+      <h2>My contribution</h2>
+      <ul>{% for item in page.contribution %}<li>{{ item | escape }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+
+    {%- if page.technologies and page.technologies.size > 0 %}
+    <section class="case-block">
+      <h2>Technologies</h2>
+      <ul class="tags">{% for item in page.technologies %}<li>{{ item | escape }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+
+    {%- if page.implementation and page.implementation != '' %}
+    <section class="case-block case-wide">
+      <h2>Technical implementation</h2>
+      <div class="prose">{{ page.implementation | markdownify }}</div>
+    </section>
+    {%- endif %}
+
+    {%- if page.challenges and page.challenges.size > 0 %}
+    <section class="case-block case-wide">
+      <h2>Problems solved</h2>
+      <ul>{% for item in page.challenges %}<li>{{ item | escape }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+  </div>
+
+  <nav class="case-nav" aria-label="More projects">
+    {%- if previous_index >= 0 %}
+    {%- assign other = ordered[previous_index] %}
+    <a href="{{ other.url | relative_url }}" rel="prev"><span>← Previous</span><strong>{{ other.title | escape }}</strong></a>
+    {%- else %}<span></span>
+    {%- endif %}
+    {%- if next_index < ordered.size %}
+    {%- assign other = ordered[next_index] %}
+    <a class="next" href="{{ other.url | relative_url }}" rel="next"><span>Next →</span><strong>{{ other.title | escape }}</strong></a>
+    {%- endif %}
+  </nav>
 </article>

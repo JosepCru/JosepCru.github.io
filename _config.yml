@@ -1,7 +1,7 @@
 # Site settings. Content lives in _data/*.json and _projects/*.md and is
 # edited from /admin — you normally do not need to touch this file.
 title: "Josep Cruañes"
-description: "Portfolio of Josep Cruañes Giner — AI for electron microscopy, game development and hardware projects."
+description: "Josep Cruañes is a software developer and PhD researcher at ICN2 working on AI and scientific computing for microscopy, with a background in game development."
 url: "https://josepcru.github.io"
 baseurl: ""
 lang: en
