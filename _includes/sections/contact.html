@@ -1,0 +1,25 @@
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p class="lead">{{ profile.contact_intro | escape | newline_to_br }}</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <dl class="facts">
+        <div><dt>Location</dt><dd>{{ profile.location | escape }}</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:{{ profile.email | escape }}">{{ profile.email | escape }}</a></dd></div>
+      </dl>
+      {%- if profile.map_embed and profile.map_embed != '' %}
+      <iframe class="map" src="{{ profile.map_embed }}" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      {%- endif %}
+    </div>
+    <form class="contact-form" id="contact-form" action="{{ profile.form_endpoint }}" method="post">
+      <div class="form-row">
+        <label>Your Name <input type="text" name="name" autocomplete="name" required></label>
+        <label>Your Email <input type="email" name="email" autocomplete="email" required></label>
+      </div>
+      <label>Subject <input type="text" name="subject" required></label>
+      <label>Message <textarea name="message" rows="7" required></textarea></label>
+      <p class="form-status" id="form-status" role="status" hidden></p>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>

@@ -6,6 +6,7 @@ client: "Florida Universitària"
 link: "https://goldenmonkeys.itch.io/magocracia"
 link_label: "itch.io/magocracia"
 summary: "Action RPG where a retired detective returns to a 1920s-inspired magical city full of gangs, crime and corruption."
+order: 1
 cover: "/assets/img/projects/magocracia/01.jpg"
 images: ["/assets/img/projects/magocracia/01.jpg", "/assets/img/projects/magocracia/02.jpg", "/assets/img/projects/magocracia/03.jpg"]
 ---

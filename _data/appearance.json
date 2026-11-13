@@ -1,0 +1,29 @@
+{
+  "sections": [
+    {
+      "id": "about",
+      "visible": true
+    },
+    {
+      "id": "skills",
+      "visible": true
+    },
+    {
+      "id": "resume",
+      "visible": true
+    },
+    {
+      "id": "projects",
+      "visible": true
+    },
+    {
+      "id": "contact",
+      "visible": true
+    }
+  ],
+  "project_columns": "auto",
+  "content_width": "1280",
+  "section_spacing": "normal",
+  "cover_ratio": "3 / 2",
+  "cover_fit": "contain"
+}

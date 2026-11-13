@@ -6,6 +6,7 @@ client: "Florida Universitària"
 link: "https://goldenmonkeys.itch.io/yourblurryworld"
 link_label: "itch.io/yourblurryworld"
 summary: "Serious game about mental health that narrates the phases of depression through a distorted reality."
+order: 2
 cover: "/assets/img/projects/your-blurry-world/01.jpg"
 images: ["/assets/img/projects/your-blurry-world/01.jpg", "/assets/img/projects/your-blurry-world/02.jpg", "/assets/img/projects/your-blurry-world/03.jpg"]
 ---

@@ -85,6 +85,33 @@
         ] }
       ]
     },
+    appearance: {
+      title: "Apariencia",
+      path: "_data/appearance.json",
+      intro: "Estos ajustes fijan límites, no medidas exactas: la web se sigue adaptando sola a móvil y tablet. Por ejemplo, «4 columnas» significa «como máximo 4 cuando quepan».",
+      fields: [
+        { key: "sections", label: "Secciones de la portada: orden y visibilidad", type: "sections", help: "La bienvenida con tu foto siempre va primero. El menú lateral sigue este mismo orden." },
+        { row: [
+          { key: "project_columns", label: "Columnas de proyectos (máximo)", type: "select", options: [
+            ["auto", "Automático: las que quepan"], ["2", "2 por fila"], ["3", "3 por fila"], ["4", "4 por fila"]
+          ] },
+          { key: "content_width", label: "Ancho máximo del contenido", type: "select", options: [
+            ["960", "Estrecho (960 px)"], ["1100", "Medio (1100 px)"], ["1280", "Ancho (1280 px)"], ["1440", "Muy ancho (1440 px)"], ["full", "Todo el ancho disponible"]
+          ] }
+        ] },
+        { row: [
+          { key: "section_spacing", label: "Espaciado entre secciones", type: "select", options: [
+            ["compact", "Compacto"], ["normal", "Normal"], ["spacious", "Amplio"]
+          ] },
+          { key: "cover_ratio", label: "Proporción de las portadas de proyecto", type: "select", options: [
+            ["16 / 9", "16:9 (panorámica)"], ["3 / 2", "3:2"], ["4 / 3", "4:3"], ["1 / 1", "1:1 (cuadrada)"]
+          ] }
+        ] },
+        { key: "cover_fit", label: "Encaje de la imagen en la portada", type: "select", options: [
+          ["contain", "Mostrar la imagen entera (puede dejar bandas a los lados)"], ["cover", "Rellenar el recuadro (puede recortar los bordes)"]
+        ] }
+      ]
+    },
     resume: {
       title: "Currículum",
       path: "_data/resume.json",
@@ -251,7 +278,7 @@
   /* JSON values are valid YAML, so Jekyll reads them and we can parse   */
   /* them back with JSON.parse — no YAML library needed.                 */
   /* ------------------------------------------------------------------ */
-  var FRONT_MATTER_KEYS = ["title", "category", "date", "client", "link", "link_label", "summary", "video", "published", "cover", "images"];
+  var FRONT_MATTER_KEYS = ["title", "category", "date", "client", "link", "link_label", "summary", "video", "published", "order", "cover", "images"];
 
   function parseProject(text) {
     var match = /^---\r?\n([\s\S]*?)\r?\n?---\r?\n?([\s\S]*)$/.exec(text);
@@ -362,6 +389,8 @@
     if (def.type === "list") return buildList(def, target);
     if (def.type === "image") return buildImageField(def, target);
     if (def.type === "draft") return buildDraftField(def, target);
+    if (def.type === "select") return buildSelect(def, target);
+    if (def.type === "sections") return buildSectionOrder(def, target);
 
     var input;
     var value = target[def.key];
@@ -383,6 +412,52 @@
       markDirty();
     });
     return el("label", { class: "field" }, def.label, input, def.help ? el("span", { class: "help", text: def.help }) : null);
+  }
+
+  function buildSelect(def, target) {
+    var select = el("select");
+    def.options.forEach(function (option) {
+      select.appendChild(el("option", { value: option[0], text: option[1] }));
+    });
+    select.value = target[def.key];
+    select.addEventListener("change", function () { target[def.key] = select.value; markDirty(); });
+    return el("label", { class: "field" }, def.label, select, def.help ? el("span", { class: "help", text: def.help }) : null);
+  }
+
+  // A fixed set of rows that can be reordered and switched on or off.
+  function buildSectionOrder(def, target) {
+    var names = { about: "About", skills: "Skills", resume: "Resume", projects: "Projects", contact: "Contact" };
+    var items = target[def.key];
+    var card = el("div", { class: "card" }, el("h3", { text: def.label }), el("p", { class: "help", text: def.help }));
+    var body = el("ul", { class: "list" });
+    card.appendChild(body);
+    function paint() {
+      body.textContent = "";
+      items.forEach(function (item, index) {
+        var box = el("input", { type: "checkbox", "aria-label": "Visible" });
+        box.checked = item.visible !== false;
+        box.addEventListener("change", function () { item.visible = box.checked; markDirty(); });
+        body.appendChild(el("li", null,
+          el("label", { class: "check-inline" }, box, el("strong", { text: names[item.id] || item.id })),
+          moveButtons(items, index, paint)
+        ));
+      });
+    }
+    paint();
+    return card;
+  }
+
+  // Up/down buttons that swap an item with its neighbour, then repaint.
+  function moveButtons(items, index, repaint) {
+    function move(delta) {
+      var other = index + delta;
+      var item = items[index]; items[index] = items[other]; items[other] = item;
+      markDirty(); repaint();
+    }
+    return el("span", { class: "move" },
+      el("button", { type: "button", class: "small", "aria-label": "Subir", disabled: index === 0, onclick: function () { move(-1); } }, "↑"),
+      el("button", { type: "button", class: "small", "aria-label": "Bajar", disabled: index === items.length - 1, onclick: function () { move(1); } }, "↓")
+    );
   }
 
   // Jekyll skips any file whose front matter says "published: false".
@@ -481,7 +556,7 @@
 
   function renderShell(content) {
     var tabs = el("nav", { class: "tabs", "aria-label": "Secciones" });
-    [["projects", "Proyectos"], ["profile", "Perfil"], ["skills", "Skills"], ["resume", "Currículum"]].forEach(function (tab) {
+    [["projects", "Proyectos"], ["profile", "Perfil"], ["skills", "Skills"], ["resume", "Currículum"], ["appearance", "Apariencia"]].forEach(function (tab) {
       tabs.appendChild(el("button", { type: "button", class: state.tab === tab[0] ? "active" : "", onclick: function () {
         if (!confirmLeave()) return;
         state.dirty = false;
@@ -529,6 +604,7 @@
     var section = SECTIONS[name];
     var data = JSON.parse(JSON.stringify(state.sections[name])); // edit a copy
     var view = el("main", { class: "view" }, el("div", { class: "view-head" }, el("h2", { text: section.title })));
+    if (section.intro) view.appendChild(el("p", { class: "intro", text: section.intro }));
     var card = el("div", { class: "card" });
     card.appendChild(buildFields(section.fields, data));
     view.appendChild(card);
@@ -556,8 +632,14 @@
       )
     );
     if (!state.projects.length) view.appendChild(el("p", { class: "empty", text: "Todavía no hay proyectos." }));
+    var order = state.projects.slice(); // working copy; nothing changes until it is saved
     var list = el("ul", { class: "list" });
-    state.projects.forEach(function (project) {
+    view.appendChild(list);
+    function paint() {
+      list.textContent = "";
+      order.forEach(addRow);
+    }
+    function addRow(project, index) {
       var thumb = el("img", { alt: "" });
       thumb.src = imageSrc(project.data.cover || (project.data.images || [])[0]);
       list.appendChild(el("li", null,
@@ -566,10 +648,27 @@
           el("strong", { text: project.data.title || project.slug }),
           el("span", { text: [project.data.published === false ? "BORRADOR" : null, project.data.category, project.data.date].filter(Boolean).join(" · ") })
         ),
-        el("button", { type: "button", onclick: function () { renderProjectEditor(project); } }, "Editar")
+        moveButtons(order, index, paint),
+        el("button", { type: "button", onclick: function () { if (confirmLeave()) { state.dirty = false; renderProjectEditor(project); } } }, "Editar")
       ));
-    });
-    view.appendChild(list);
+    }
+    paint();
+    if (order.length > 1) {
+      view.appendChild(el("p", { class: "help", text: "Usa ↑ ↓ para cambiar el orden en que aparecen en la portada y pulsa «Guardar y publicar»." }));
+      view.appendChild(saveBar(function () {
+        var changes = [];
+        order.forEach(function (project, index) {
+          if (project.data.order === index + 1) return;
+          project.data.order = index + 1;
+          changes.push({ path: PROJECTS_DIR + project.slug + ".md", text: serializeProject(project) });
+        });
+        if (!changes.length) return Promise.reject(new Error("El orden no ha cambiado."));
+        return commit("Admin: reorder projects", changes).then(function () {
+          published();
+          return loadAll().then(renderTab);
+        });
+      }));
+    }
     renderShell(view);
   }
 
@@ -652,6 +751,10 @@
       if (!project.data.images.length) return Promise.reject(new Error("Añade al menos una imagen."));
       var changes = [];
       if (isNew) {
+        // Place it before every existing project; reorder later from the list.
+        project.data.order = state.projects.reduce(function (min, p) {
+          return Math.min(min, Number(p.data.order) || 0);
+        }, 1) - 1;
         var slug = uniqueName(slugify(project.data.title) || "project", state.projects.map(function (p) { return p.slug; }));
         var finalDir = IMAGES_DIR + slug + "/";
         // Move this session's uploads from the draft folder to the real one.
@@ -717,7 +820,8 @@
       }));
       return Promise.all([loadProjects, loadSections]).then(function (results) {
         state.projects = results[0].sort(function (a, b) {
-          return String(b.data.date || "").localeCompare(String(a.data.date || ""));
+          var byOrder = (Number(a.data.order) || 0) - (Number(b.data.order) || 0);
+          return byOrder || String(b.data.date || "").localeCompare(String(a.data.date || ""));
         });
         names.forEach(function (name, i) { state.sections[name] = results[1][i]; });
       });

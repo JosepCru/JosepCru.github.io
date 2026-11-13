@@ -19,6 +19,25 @@
   <link rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}">
   <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  {%- comment %} Appearance settings become CSS variables; site.css only ever reads the variables. {% endcomment %}
+  {%- assign look = site.data.appearance %}
+  {%- assign columns = look.project_columns | default: 'auto' %}
+  {%- if columns == 'auto' %}{% assign columns = 12 %}{% endif %}
+  {%- assign width = look.content_width | default: '1280' %}
+  {%- case look.section_spacing %}
+  {%- when 'compact' %}{% assign spacing = 'clamp(32px, 4vw, 56px)' %}
+  {%- when 'spacious' %}{% assign spacing = 'clamp(64px, 10vw, 128px)' %}
+  {%- else %}{% assign spacing = 'clamp(48px, 7vw, 88px)' %}
+  {%- endcase %}
+  <style>
+    :root {
+      --content-max: {% if width == 'full' %}100000px{% else %}{{ width }}px{% endif %};
+      --section-pad: {{ spacing }};
+      --project-cols: {{ columns }};
+      --cover-ratio: {{ look.cover_ratio | default: '3 / 2' }};
+      --cover-fit: {{ look.cover_fit | default: 'contain' }};
+    }
+  </style>
 </head>
 <body>
 
@@ -37,11 +56,11 @@
     </a>
     <nav class="sidebar-nav" aria-label="Main">
       <a href="{{ home }}#hero" data-section="hero">Home</a>
-      <a href="{{ home }}#about" data-section="about">About</a>
-      <a href="{{ home }}#skills" data-section="skills">Skills</a>
-      <a href="{{ home }}#resume" data-section="resume">Resume</a>
-      <a href="{{ home }}#projects" data-section="projects"{% if page.collection == 'projects' %} class="active"{% endif %}>Projects</a>
-      <a href="{{ home }}#contact" data-section="contact">Contact</a>
+      {%- for s in site.data.appearance.sections %}
+      {%- if s.visible %}
+      <a href="{{ home }}#{{ s.id }}" data-section="{{ s.id }}"{% if s.id == 'projects' and page.collection == 'projects' %} class="active"{% endif %}>{{ s.id | capitalize }}</a>
+      {%- endif %}
+      {%- endfor %}
     </nav>
     <div class="sidebar-socials">
       {%- for s in profile.socials %}

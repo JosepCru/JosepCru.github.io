@@ -1,0 +1,16 @@
+<section id="skills" class="section">
+  <h2>Skills</h2>
+  <p class="lead">{{ skills.intro | escape | newline_to_br }}</p>
+  <div class="skill-groups">
+    {%- for group in skills.groups %}
+    <div class="skill-group">
+      <h3>{{ group.name | escape }}</h3>
+      <ul class="tags">
+        {%- for skill in group.skills %}
+        <li>{{ skill | escape }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- endfor %}
+  </div>
+</section>

@@ -44,7 +44,8 @@
 
   /* Hero: typing effect cycling through the roles */
   var typed = document.querySelector(".typed");
-  if (typed && !reduceMotion) {
+  // Runs even with reduced motion: it is a small text change, not movement across the screen.
+  if (typed) {
     var roles = (typed.dataset.roles || "").split("|").filter(Boolean);
     if (roles.length) {
       var roleIndex = 0, length = 0, deleting = false;

@@ -1,0 +1,17 @@
+<section id="resume" class="section">
+  <h2>Resume</h2>
+  <div class="resume-grid">
+    <div>
+      <h3>Education</h3>
+      {%- for item in resume.education %}
+      {% include resume-item.html item=item %}
+      {%- endfor %}
+    </div>
+    <div>
+      <h3>Professional Experience</h3>
+      {%- for item in resume.experience %}
+      {% include resume-item.html item=item %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
