@@ -28,5 +28,13 @@
     "Scientific instrumentation",
     "Data analysis"
   ],
-  "publications": []
+  "publications": [
+    {
+      "title": "Mic-hackathon 2024: hackathon on machine learning for electron and scanning probe microscopy.",
+      "authors": "PRATIUSH, Utkarsh, et al.",
+      "venue": "Machine Learning: Science and Technology 6.4",
+      "year": "2025",
+      "link": "https://doi.org/10.1088/2632-2153/ae1f5d"
+    }
+  ]
 }
