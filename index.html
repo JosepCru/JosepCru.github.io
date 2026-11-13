@@ -1,468 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+---
+{%- assign profile = site.data.profile -%}
+{%- assign skills = site.data.skills -%}
+{%- assign resume = site.data.resume -%}
+{%- assign projects = site.projects | sort: 'date' | reverse -%}
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<section id="hero" class="hero" style="background-image: linear-gradient(rgba(8,22,30,.55), rgba(8,22,30,.55)), url('{{ profile.hero_image | relative_url }}')">
+  <h1>{{ profile.name | escape }}</h1>
+  <p class="hero-roles">I'm <span class="typed" data-roles="{{ profile.roles | join: '|' | escape }}">{{ profile.roles | first | escape }}</span></p>
+  <a class="hero-down" href="#about" aria-label="Scroll to About">↓</a>
+</section>
 
-  <title>Portfolio Josep Cruañes Giner</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-</head>
-
-<body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
-
-      <div class="profile">
-        <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">Josep Cruañes</a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="https://www.instagram.com/josep_cruanes/" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/josep-cruañes-giner-814485279/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
-
-      <nav id="navbar" class="nav-menu navbar">
-        <ul>
-          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-          <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-brain"></i> <span>Skills</span></a></li>
-          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> Resume</a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
+<section id="about" class="section">
+  <h2>About</h2>
+  <p class="lead">{{ profile.about_intro | escape | newline_to_br }}</p>
+  <div class="about-grid">
+    <img class="about-photo" src="{{ profile.photo | relative_url }}" alt="{{ profile.name | escape }}" loading="lazy">
+    <div>
+      <h3>{{ profile.about_heading | escape }}</h3>
+      <dl class="facts">
+        {%- for f in profile.facts %}
+        <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
+        {%- endfor %}
+      </dl>
+      <p>{{ profile.about_text | escape | newline_to_br }}</p>
     </div>
-  </header><!-- End Header -->
+  </div>
+</section>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="hero-container">
-      <h1>Josep Cruañes</h1>
-      <p>I'm <span class="typed" data-typed-items="Programmer, Game Developer, Designer"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+<section id="skills" class="section alt">
+  <h2>Skills</h2>
+  <p class="lead">{{ skills.intro | escape | newline_to_br }}</p>
+  <div class="skill-groups">
+    {%- for group in skills.groups %}
+    <div class="skill-group">
+      <h3>{{ group.name | escape }}</h3>
+      <ul class="tags">
+        {%- for skill in group.skills %}
+        <li>{{ skill | escape }}</li>
+        {%- endfor %}
+      </ul>
     </div>
-  </section><!-- End Hero -->
+    {%- endfor %}
+  </div>
+</section>
 
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container section-title" data-aos="fade-up">
-        <div class="section-title">
-          <h2>About</h2>
-          <p>Hi, I'm Josep Cruañes Giner. I graduated with a Degree in Design and Development of Video Games 
-            and Interactive Experiences, I graduated with two Master’s degrees (one in Teacher Training and 
-            another in Multidisciplinary Research in Experimental Sciences) and I am currently pursuing a PhD 
-            with the GAeN group at ICN2.
-          </p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <h3>Programmer &amp; Designer.</h3>
-            <br>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>9 February 2001</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>josepcru.github.io</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+601 331 936</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Cerdanyola del Vallès, Barcelona</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>24</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Work:</strong> <span>Programming AI models for ICN2</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>josepcrugixtv@gmail.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Not Available</span></li>
-                </ul>
-              </div>
-            </div>
-            <p>
-              I'm originally from Xàtiva, Valencia, but I’m currently living in Cerdanyola del Vallès as a 
-              Master's student working at the Catalan Institute of Nanoscience and Nanotechnology (ICN2) 
-              in Barcelona. Additionally, I’ll be starting an internship for my other Master's program 
-              (Teacher Training for Compulsory Secondary Education and Baccalaureate, Vocational Training, 
-              and Language Teaching, specializing in Technology) at Escola Escaladei, here in Cerdanyola.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-
-    <!-- ======= Skills Section ======= -->
-    <section id="skills" class="skills section-bg">
-      <div class="container section-title" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Skills</h2>
-          <p>Among my strongest skills are programming in C# and C++, as well as building devices with Arduino. Over the course 
-            of my four years in the Degree in Design and Development of Video Games and Interactive Experiences, I have developed numerous games as a programmer, mostly in Unity, with one 
-            major project in Unreal. Currently, I am working on a Python-based project aimed at automating a microscope to identify nanoparticles.
-            <br><br>
-            Recently, I have shifted my focus to learning Python and programming AI methods, while continuing to explore new 
-            technologies in Unreal and maintaining a solid foundation in C++.
-          </p>
-        </div>
-
-        <div class="row skills-content">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-                <span class="skill">Control over Unity <i class="val">70%</i></span>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            
-            <div class="progress">
-                <span class="skill">Control over Unreal <i class="val">60%</i></span>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            
-            <div class="progress">
-                <span class="skill">C++ <i class="val">75%</i></span>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Python <i class="val">40%</i></span>
-              <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-6" >
-
-            <div class="progress">
-              <span class="skill">C# <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Arduino <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">3DS Max/Blender <i class="val">55%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Skills Section -->
-
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-
-            <h3 class="resume-title">Education</h3>
-             <div class="resume-item">
-              <h4>PhD Researcher – Group GAeN</h4>
-              <h5>2025 - Present</h5>
-              <p><em>Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, Spain</em></p>
-              <p>Developing AI-driven models and systems for nanoparticle analysis under the GAeN group.</p>
-            </div><!-- Edn Resume Item -->
-            
-            <div class="resume-item">
-              <h4>Master of Multidisciplinary Research in Experimental Sciences</h4>
-              <h5>2024 - 2025</h5>
-              <p><em>Barcelona Institute of Science and Technology (BIST) and the Pompeu Fabra University (UPF), Barcelona, Spain</em></p>
-              <p>This master's program was an enriching experience that taught me about statistics and data analysis, machine learning, microscopy, and more. I completed both a Major and a Minor project focused on applying machine learning techniques to microscopy.</p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Master's Degree 
-                in Teacher Training for Compulsory Secondary Education and Baccalaureate, Vocational Training, and Language 
-                Teaching, specializing in Technology</h4>
-              <h5>2024 - 2025</h5>
-              <p><em>Universidad Alfonso X el sabio, Madrid, Spain</em></p>
-              <p>This program provided me with the pedagogical and technological tools necessary for teaching. I completed my internship at Escola Escaladei in Cerdanyola del Vallès, where I applied modern educational methodologies in technology-related subjects.</p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Bachelor's Degree in Game Design and Development and Interactive Experiences</h4>
-              <h5>2020 - 2024</h5>
-              <p><em>Florida Universitària &amp; Universitat Politècnica de València, València, España</em></p>
-              <p>During my time at Florida Universitària and my internship at UPV, I worked with most of the software commonly used today for game development: Unreal, Unity, Blender, 3DSMax, Godot, among others. My primary focus was on programming, and I am highly excited to continue learning and improving my skills in these game engines.</p>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Programmer of machine learning models applied to microscopes</h4>
-              <h5>2024 - Present</h5>
-              <p><em>Catalan Institute of Nanoscience and Nanotechnology (ICN2), Barcelona, España</em></p>
-              <ul>
-                <li>Developed a method to generate noisy images and create a mosaic from them.</li>
-                <li>Designed and implemented the motion system for nanoparticle searching.</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Internship Videogame programmer at NRHB Group</h4>
-              <h5>2023 - 2024</h5>
-              <p><em>Instituto de Investigación en Tecnologías Centradas en el Ser Humano (i3B) de la Universitat Politècnica de València (UPV), València, España</em></p>
-              <ul>
-                <li>Created multiple minigames for the LEVEL-UP project.</li>
-                <li>Implemented a day/night cycle with baked lighting.</li>
-                <li>Designed and implemented patrol behaviors and animations for various entities on the map.</li>
-                <li>Contributed to the design and programming of the user interface (UI).</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Resume Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
-      <div class="container section-title" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Portfolio</h2>
-          <p>As a programmer I worked on many projects in my university, I've been one of the main programmers for all of them. <br><br> Here are some of the projects 
-            that I've been doing through the last years.</p>
-        </div>
-
-        <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-          
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Magocracia is an action rpg where you take the mantle of a retired detective in a magical world modeled after the 1920s, returning to a city now filled with gangs, crime and corruption. After the misterious death of a dear friend, it's obvious that someone must make things right again."><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details-4.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Your Blurry World is a serious game project about mental health that narrates the different phases of the depression suffered by our protagonist through an adventure throughout different linear levels that will tell her story in a distorted reality."><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Aka No Rage is a side-scrolling 2D Rogue-lite made in Unity that mixes traditional Japanense aesthetics with futuristic Neo-Tokyo vibes in a story full of action, agile movements and combat against terrifying yokai."><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details-2.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="The project consists of a vehicle using Arduino, which can work in two ways:
-
-                Autonomously, using an ultrasonic sensor controlled by Arduino.
-                
-                By remote control via Bluetooth system with an Android app."><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details-3.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container section-title" data-aos="fade-up">
-    
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>If you want to contact me, feel free to call me or leave a message. I'll respond you as soon as possible.</p>
-        </div>
-    
-        <div class="row">
-          <div class="col-lg-5 d-flex align-items-stretch">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>ICN2, UAB Campus, Bellaterra (Barcelona)</p>
-              </div>
-    
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>josepcrugixtv@gmail.com</p>
-              </div>
-    
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+34 601 331 936</p>
-              </div>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.1404236402354!2d2.109180375738324!3d41.5012316712856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49678a339b0e5%3A0xd17dfdf516b505f3!2sInstituto%20Catal%C3%A1n%20de%20Nanociencia%20y%20Nanotecnolog%C3%ADa%20(ICN2)!5e0!3m2!1ses!2ses!4v1737015058863!5m2!1ses!2ses" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-    
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form id="contact-form" action="https://formspree.io/f/mbllbenq" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
-              </div>
-              <div class="form-group">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
-              </div>
-              <div class="my-3">
-                <div id="form-response" style="display: none; color: green; text-align: center; margin-top: 10px;">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-    
-        </div>
-    
-      </div>
-    </section>
-    
-    <script>
-      document.getElementById('contact-form').addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevenir el envío tradicional del formulario
-        const form = event.target;
-        const formData = new FormData(form);
-    
-        try {
-          const response = await fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-          });
-    
-          if (response.ok) {
-            document.getElementById('form-response').style.display = 'block'; // Mostrar mensaje de éxito
-            form.reset(); // Reiniciar el formulario
-          } else {
-            document.getElementById('form-response').innerText = 'There was an error sending your message. Please try again later.';
-            document.getElementById('form-response').style.color = 'red';
-            document.getElementById('form-response').style.display = 'block';
-          }
-        } catch (error) {
-          document.getElementById('form-response').innerText = 'Error: Unable to send your message. Please try again later.';
-          document.getElementById('form-response').style.color = 'red';
-          document.getElementById('form-response').style.display = 'block';
-        }
-      });
-    </script>
-    <!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
+<section id="resume" class="section">
+  <h2>Resume</h2>
+  <div class="resume-grid">
+    <div>
+      <h3>Education</h3>
+      {%- for item in resume.education %}
+      {% include resume-item.html item=item %}
+      {%- endfor %}
     </div>
-  </footer><!-- End  Footer -->
+    <div>
+      <h3>Professional Experience</h3>
+      {%- for item in resume.experience %}
+      {% include resume-item.html item=item %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<section id="projects" class="section alt">
+  <h2>Projects</h2>
+  <p class="lead">{{ profile.projects_intro | escape | newline_to_br }}</p>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  {%- assign categories = projects | map: 'category' | uniq | sort -%}
+  {%- if categories.size > 1 %}
+  <div class="filters" role="group" aria-label="Filter projects by category">
+    <button type="button" class="active" data-filter="*">All</button>
+    {%- for c in categories %}
+    <button type="button" data-filter="{{ c | escape }}">{{ c | escape }}</button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <div class="project-grid">
+    {%- for p in projects %}
+    <a class="project-card" href="{{ p.url | relative_url }}" data-category="{{ p.category | escape }}">
+      <img src="{{ p.cover | default: p.images[0] | relative_url }}" alt="" loading="lazy">
+      <div class="project-card-body">
+        <span class="eyebrow">{{ p.category | escape }} · {{ p.date | date: '%Y' }}</span>
+        <strong>{{ p.title | escape }}</strong>
+        <p>{{ p.summary | escape }}</p>
+      </div>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
 
-</body>
-
-</html>
-
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p class="lead">{{ profile.contact_intro | escape | newline_to_br }}</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <dl class="facts">
+        <div><dt>Location</dt><dd>{{ profile.location | escape }}</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:{{ profile.email | escape }}">{{ profile.email | escape }}</a></dd></div>
+      </dl>
+      {%- if profile.map_embed and profile.map_embed != '' %}
+      <iframe class="map" src="{{ profile.map_embed }}" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      {%- endif %}
+    </div>
+    <form class="contact-form" id="contact-form" action="{{ profile.form_endpoint }}" method="post">
+      <div class="form-row">
+        <label>Your Name <input type="text" name="name" autocomplete="name" required></label>
+        <label>Your Email <input type="email" name="email" autocomplete="email" required></label>
+      </div>
+      <label>Subject <input type="text" name="subject" required></label>
+      <label>Message <textarea name="message" rows="7" required></textarea></label>
+      <p class="form-status" id="form-status" role="status" hidden></p>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<article class="project section">
+  <a class="back" href="{{ '/' | relative_url }}#projects">← All projects</a>
+  <p class="eyebrow">{{ page.category | escape }}</p>
+  <h1>{{ page.title | escape }}</h1>
+
+  <div class="project-layout">
+    <div class="project-media">
+    <div class="gallery" data-gallery>
+      <div class="gallery-track">
+        {%- for img in page.images %}
+        <img src="{{ img | relative_url }}" alt="{{ page.title | escape }} — image {{ forloop.index }}"{% unless forloop.first %} loading="lazy"{% endunless %}>
+        {%- endfor %}
+      </div>
+      {%- if page.images.size > 1 %}
+      <button class="gallery-btn prev" type="button" aria-label="Previous image">‹</button>
+      <button class="gallery-btn next" type="button" aria-label="Next image">›</button>
+      <div class="gallery-dots" aria-hidden="true">
+        {%- for img in page.images %}<span></span>{% endfor -%}
+      </div>
+      {%- endif %}
+    </div>
+    {%- if page.video and page.video != '' %}
+    {%- comment %} Accepts watch?v=ID, youtu.be/ID, /embed/ID and /shorts/ID links. {% endcomment %}
+    {%- assign video_id = page.video | split: 'v=' | last | split: 'youtu.be/' | last | split: 'embed/' | last | split: 'shorts/' | last | split: '&' | first | split: '?' | first | split: '/' | first %}
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/{{ video_id | url_encode }}" title="{{ page.title | escape }} — video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    {%- endif %}
+    </div>
+
+    <div class="project-side">
+      <dl class="project-info">
+        {%- if page.category and page.category != '' %}<dt>Category</dt><dd>{{ page.category | escape }}</dd>{% endif %}
+        {%- if page.client and page.client != '' %}<dt>Client</dt><dd>{{ page.client | escape }}</dd>{% endif %}
+        {%- if page.date %}<dt>Date</dt><dd>{{ page.date | date: '%-d %B %Y' }}</dd>{% endif %}
+        {%- if page.link and page.link != '' %}<dt>Link</dt><dd><a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.link_label | default: page.link | escape }}</a></dd>{% endif %}
+      </dl>
+      <div class="prose">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,22 @@
+# Site settings. Content lives in _data/*.json and _projects/*.md and is
+# edited from /admin — you normally do not need to touch this file.
+title: "Josep Cruañes"
+description: "Portfolio of Josep Cruañes Giner — AI for electron microscopy, game development and hardware projects."
+url: "https://josepcru.github.io"
+baseurl: ""
+lang: en
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+
+exclude:
+  - Readme.txt
+  - README.md
+  - docs
+  - .superpowers

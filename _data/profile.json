@@ -1,0 +1,27 @@
+{
+  "name": "Josep Cruañes",
+  "tagline": "PhD · ICN2",
+  "roles": ["Programmer", "Game Developer", "PhD Student"],
+  "hero_image": "/assets/img/hero-bg.jpg",
+  "photo": "/assets/img/profile-img.jpg",
+  "about_intro": "Hi, I'm Josep Cruañes Giner. I graduated with a Degree in Design and Development of Video Games and Interactive Experiences, I graduated with two Master's degrees (one in Teacher Training and another in Multidisciplinary Research in Experimental Sciences) and I am currently pursuing a PhD with the GAeN group at ICN2.",
+  "about_heading": "Programmer & Designer.",
+  "about_text": "I'm originally from Xàtiva, Valencia, but I'm currently living in Cerdanyola del Vallès as a Master's student working at the Catalan Institute of Nanoscience and Nanotechnology (ICN2) in Barcelona. Additionally, I'll be starting an internship for my other Master's program (Teacher Training for Compulsory Secondary Education and Baccalaureate, Vocational Training, and Language Teaching, specializing in Technology) at Escola Escaladei, here in Cerdanyola.",
+  "facts": [
+    { "label": "Website", "value": "josepcru.github.io" },
+    { "label": "City", "value": "Cerdanyola del Vallès, Barcelona" },
+    { "label": "Work", "value": "Programming AI models for ICN2" },
+    { "label": "Email", "value": "josepcrugixtv@gmail.com" },
+    { "label": "Freelance", "value": "Not Available" }
+  ],
+  "projects_intro": "As a programmer I worked on many projects in my university, I've been one of the main programmers for all of them. Here are some of the projects that I've been doing through the last years.",
+  "contact_intro": "If you want to contact me, feel free to leave a message. I'll respond you as soon as possible.",
+  "email": "josepcrugixtv@gmail.com",
+  "location": "ICN2, UAB Campus, Bellaterra (Barcelona)",
+  "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2988.1404236402354!2d2.109180375738324!3d41.5012316712856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49678a339b0e5%3A0xd17dfdf516b505f3!2sInstituto%20Catal%C3%A1n%20de%20Nanociencia%20y%20Nanotecnolog%C3%ADa%20(ICN2)!5e0!3m2!1ses!2ses!4v1737015058863!5m2!1ses!2ses",
+  "form_endpoint": "https://formspree.io/f/mbllbenq",
+  "socials": [
+    { "name": "Instagram", "url": "https://www.instagram.com/josep_cruanes/" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/josep-cruañes-giner-814485279/" }
+  ]
+}
